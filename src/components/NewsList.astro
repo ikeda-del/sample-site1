@@ -1,0 +1,95 @@
+---
+import { newsItems, newsCategories } from '../data/news';
+import NewsListItem from './NewsListItem.astro';
+
+interface Props {
+  limit?: number;
+  showFilter?: boolean;
+  showIntro?: boolean;
+}
+
+const { limit, showFilter = false, showIntro = false } = Astro.props;
+const items = limit ? newsItems.slice(0, limit) : newsItems;
+---
+
+<div>
+  {
+    showIntro && (
+      <p class="mb-10 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+        当社からのお知らせ、採用情報、施工に関するニュースを掲載しています。
+      </p>
+    )
+  }
+
+  {
+    showFilter && (
+      <div class="mb-10 flex flex-wrap gap-2" role="group" aria-label="カテゴリで絞り込み">
+        {
+          newsCategories.map((category, index) => (
+            <button
+              type="button"
+              data-category={category}
+              class:list={[
+                "news-filter-btn rounded-sm px-3 py-1.5 text-xs font-semibold transition sm:text-sm",
+                index === 0
+                  ? "bg-primary text-white"
+                  : "border border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary",
+              ]}
+            >
+              {category}
+            </button>
+          ))
+        }
+      </div>
+    )
+  }
+
+  <ul id="news-list" class="divide-y divide-slate-200">
+    {items.map((item) => <NewsListItem item={item} />)}
+  </ul>
+
+  <p id="news-empty" class="hidden py-16 text-center text-sm text-slate-500">
+    該当するお知らせはありません。
+  </p>
+</div>
+
+{
+  showFilter && (
+    <script>
+      const buttons = document.querySelectorAll<HTMLButtonElement>(".news-filter-btn");
+      const items = document.querySelectorAll<HTMLElement>(".news-item");
+      const empty = document.getElementById("news-empty");
+
+      const activeClasses = ["bg-primary", "text-white"];
+      const inactiveClasses = ["border", "border-slate-200", "bg-white", "text-slate-600"];
+
+      function setButtonStyle(btn: HTMLButtonElement, active: boolean) {
+        if (active) {
+          btn.classList.add(...activeClasses);
+          btn.classList.remove(...inactiveClasses, "hover:border-primary", "hover:text-primary");
+        } else {
+          btn.classList.remove(...activeClasses);
+          btn.classList.add(...inactiveClasses, "hover:border-primary", "hover:text-primary");
+        }
+      }
+
+      function applyFilter(category: string) {
+        let visible = 0;
+        items.forEach((item) => {
+          const match = category === "すべて" || item.dataset.category === category;
+          item.classList.toggle("hidden", !match);
+          if (match) visible++;
+        });
+        empty?.classList.toggle("hidden", visible > 0);
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const category = btn.dataset.category ?? "すべて";
+          buttons.forEach((b) => setButtonStyle(b, b === btn));
+          applyFilter(category);
+        });
+      });
+    </script>
+  )
+}

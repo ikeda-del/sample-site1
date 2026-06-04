@@ -1,11 +1,5 @@
 ---
-const footerNav = [
-  { label: "ホーム", href: "#top" },
-  { label: "会社概要", href: "#about" },
-  { label: "事業内容", href: "#services" },
-  { label: "お知らせ", href: "#news" },
-  { label: "お問い合わせ", href: "#contact" },
-];
+import { navItems } from '../config/navigation';
 
 const year = new Date().getFullYear();
 ---
@@ -36,7 +30,7 @@ const year = new Date().getFullYear();
         <h3 class="text-sm font-bold tracking-wider text-blue-200">サイトマップ</h3>
         <ul class="mt-4 space-y-2">
           {
-            footerNav.map((item) => (
+            navItems.map((item) => (
               <li>
                 <a
                   href={item.href}

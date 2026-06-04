@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import NewsList from '../../components/NewsList.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="お知らせ｜株式会社サンプル建設"
+  description="株式会社サンプル建設のお知らせ一覧。採用情報、施工完了のご報告、休業案内などを掲載しています。"
+>
+  <Header />
+  <main>
+    <PageHeader
+      titleEn="NEWS"
+      titleJa="お知らせ"
+      description="当社からの最新情報をお届けします。"
+    />
+    <section class="py-16 sm:py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <NewsList showIntro showFilter />
+      </div>
+    </section>
+    <section class="border-t border-slate-200 bg-accent py-12 sm:py-16">
+      <div class="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+        <p class="text-sm text-slate-600">ご不明な点はお気軽にお問い合わせください。</p>
+        <a
+          href="/#contact"
+          class="mt-6 inline-flex items-center gap-2 rounded-sm bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-primary-dark"
+        >
+          お問い合わせはこちら
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

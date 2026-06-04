@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { newsItems, getNewsBySlug } from '../../data/news';
+
+export function getStaticPaths() {
+  return newsItems.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+---
+
+<Layout
+  title={`${item.title}｜お知らせ｜株式会社サンプル建設`}
+  description={item.excerpt}
+>
+  <Header />
+  <main class="pt-16 sm:pt-20">
+    <article class="border-b border-slate-200 bg-white py-12 sm:py-16">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <nav class="mb-8 text-sm text-slate-500" aria-label="パンくずリスト">
+          <ol class="flex flex-wrap items-center gap-2">
+            <li><a href="/" class="transition hover:text-primary">ホーム</a></li>
+            <li aria-hidden="true">/</li>
+            <li><a href="/news" class="transition hover:text-primary">お知らせ</a></li>
+            <li aria-hidden="true">/</li>
+            <li class="text-slate-700" aria-current="page">{item.title}</li>
+          </ol>
+        </nav>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <time datetime={item.dateIso} class="text-sm tabular-nums text-slate-500">{item.date}</time>
+          <span class="rounded-sm bg-accent px-2.5 py-0.5 text-xs font-semibold text-primary">
+            {item.category}
+          </span>
+        </div>
+
+        <h1 class="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl">{item.title}</h1>
+
+        <div class="mt-10 space-y-6 border-t border-slate-200 pt-10">
+          {
+            item.body.map((paragraph) => (
+              <p class="leading-relaxed text-slate-700">{paragraph}</p>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 border-t border-slate-200 pt-8">
+          <a
+            href="/news"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary-dark"
+          >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            お知らせ一覧へ戻る
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
