@@ -1,0 +1,98 @@
+---
+interface Service {
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+}
+
+const services: Service[] = [
+  {
+    title: "土木工事",
+    description: "道路・河川・造成など、地域インフラの基盤づくりを担います。",
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "土木工事の現場",
+  },
+  {
+    title: "建築工事",
+    description: "公共施設から民間建築まで、設計から施工まで一貫して対応します。",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "建築工事の建物",
+  },
+  {
+    title: "とび・土工",
+    description: "足場組立や基礎工事など、安全かつ確実な施工を行います。",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "とび・土工事の作業",
+  },
+  {
+    title: "管工事",
+    description: "上下水道・排水設備など、ライフラインに関わる工事を手がけます。",
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "管工事の設備",
+  },
+  {
+    title: "舗装工事",
+    description: "道路・駐車場の舗装から補修まで、快適な交通環境を整えます。",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "舗装工事の道路",
+  },
+  {
+    title: "塗装・防水",
+    description: "建物の保護と美観向上のため、塗装・防水工事を実施します。",
+    image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "塗装・防水工事の作業",
+  },
+  {
+    title: "造園工事",
+    description: "公園・施設緑地の整備など、緑豊かな景観づくりに貢献します。",
+    image: "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "造園工事の緑地",
+  },
+  {
+    title: "解体工事",
+    description: "安全計画に基づき、環境に配慮した解体・撤去工事を行います。",
+    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80",
+    imageAlt: "解体工事の現場",
+  },
+];
+---
+
+<section id="services" class="border-t border-slate-200 bg-white py-20 sm:py-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="mb-12 text-center">
+      <p class="text-sm font-semibold tracking-widest text-primary">SERVICES</p>
+      <h2 class="mt-1 text-2xl font-bold text-slate-900 sm:text-3xl">事業内容</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+        土木・建築をはじめ、地域の暮らしと産業を支える多様な工事に対応しています。設計から施工管理まで、一貫したサービスを提供いたします。
+      </p>
+    </div>
+
+    <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        services.map((service) => (
+          <li class="group flex flex-col overflow-hidden rounded-sm border border-slate-200 bg-white shadow-sm transition hover:border-primary/30 hover:shadow-md">
+            <div class="aspect-4/3 overflow-hidden bg-slate-100">
+              <img
+                src={service.image}
+                alt={service.imageAlt}
+                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+                width="600"
+                height="450"
+              />
+            </div>
+            <div class="flex flex-1 flex-col p-4 sm:p-5">
+              <h3 class="border-l-4 border-primary pl-3 text-base font-bold text-slate-900">
+                {service.title}
+              </h3>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600">
+                {service.description}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
