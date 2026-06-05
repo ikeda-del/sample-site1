@@ -8,12 +8,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:ftp": "astro build --base /sample-site1/",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.4.3",
+    "astro-relative-links": "^0.4.2",
     "tailwindcss": "^4.3.0"
   }
 }

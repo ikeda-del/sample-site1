@@ -4,9 +4,6 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  build: {
-    assets: 'assets' // ← ★これを追加（_astro ではなく assets フォルダにCSS等を出力する設定）
-  },
   vite: {
     plugins: [tailwindcss()]
   }
